@@ -1,0 +1,37 @@
+name: DevOps Assignment CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Docker
+        id: docker_run
+        # Correct command for GitHub runners
+        run: docker compose up --build --exit-code-from test-container
+        continue-on-error: true
+
+      - name: Generate Results
+        run: |
+          if [ "${{ steps.docker_run.outcome }}" == "success" ]; then
+            touch succeeded
+          else
+            touch fail
+          fi
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            succeeded
+            fail

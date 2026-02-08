@@ -1,0 +1,12 @@
+services:
+  nginx-server:
+    build: ./nginx
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "443:443"
+
+  test-container:
+    build: ./test
+    depends_on:
+      - nginx-server
