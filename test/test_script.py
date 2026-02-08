@@ -98,8 +98,8 @@ if __name__ == "__main__":
     
     # Final verdict for CI/CD Pipeline
     if all(results):
-        print("\n🏆 VERDICT: ALL TESTS PASSED")
+        print("\n VERDICT: ALL TESTS PASSED")
         sys.exit(0) # Exit code 0 signals success to GitHub Actions
     else:
-        print("\n❌ VERDICT: SOME TESTS FAILED")
+        print("\n VERDICT: SOME TESTS FAILED")
         sys.exit(1) # Exit code 1 signals failure to GitHub Actions

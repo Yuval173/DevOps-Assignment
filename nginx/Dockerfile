@@ -15,14 +15,14 @@ RUN mkdir -p /etc/nginx/ssl && \
     -out /etc/nginx/ssl/nginx.crt \
     -subj "/C=IL/ST=Center/L=City/O=DevOps/CN=localhost"
 
-# Copy configuration and custom HTML [cite: 11, 15]
+# Copy configuration and custom HTML
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY index.html /usr/share/nginx/html/index.html
 
 # Remove default configuration to avoid port conflicts
 RUN rm /etc/nginx/sites-enabled/default
 
-# Expose ports for HTTP, Error responses, and HTTPS [cite: 13, 47]
+# Expose ports for HTTP, Error responses, and HTTPS
 EXPOSE 8080 8081 443
 
 CMD ["nginx", "-g", "daemon off;"]
